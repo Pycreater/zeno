@@ -1,22 +1,9 @@
-import { useEffect, useState } from "react";
-import { Button, Text, View } from "react-native";
+import { View, Text } from "react-native";
 
-export default function () {
-  const [count, setCount] = useState(0);
-
-  useEffect(() => {
-    let interval = setInterval(() => {
-      setCount((c) => c + 1);
-    }, 1000);
-    return () => {
-      clearInterval(interval);
-    };
-  }, []);
-
+export default function foryou() {
   return (
     <View>
-      <Text>{count}</Text>
-      <Button title="Sign up"></Button>
+      <Text>for you</Text>
     </View>
   );
 }
