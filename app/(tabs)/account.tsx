@@ -7,15 +7,19 @@ export default function account() {
   const [pictureOpen, setPictureOpened] = useState(false);
 
   return (
-    <SafeAreaView>
-      <Text>account</Text>
-      <Button
-        title="Open Bottom sheet"
-        onPress={() => {
-          setPictureOpened(true);
-        }}
-      ></Button>
-      {pictureOpen && <DownloadPicture />}
+    <SafeAreaView style={{ flex: 1 }}>
+      <View style={{ flex: 1 }}>
+        <Text>account</Text>
+        <Button
+          title="Open Bottom sheet"
+          onPress={() => {
+            setPictureOpened(true);
+          }}
+        ></Button>
+        {pictureOpen && (
+          <DownloadPicture onClose={() => setPictureOpened(false)} />
+        )}
+      </View>
     </SafeAreaView>
   );
 }
