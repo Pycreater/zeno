@@ -5,9 +5,9 @@ export default function TabLayout() {
   return (
     <Tabs screenOptions={{ tabBarActiveTintColor: "blue", headerShown: false }}>
       <Tabs.Screen
-        name="index"
+        name="foryou"
         options={{
-          title: "For you",
+          title: "For You",
           tabBarIcon: ({ color }) => (
             <FontAwesome size={28} name="home" color={color} />
           ),
@@ -20,7 +20,7 @@ export default function TabLayout() {
           "search-plus": Indicates zooming in on content, which can be associated with detailed exploration. */}
 
       <Tabs.Screen
-        name="explore"
+        name="index"
         options={{
           title: "Explore",
           tabBarIcon: ({ color }) => (

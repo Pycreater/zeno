@@ -1,16 +1,25 @@
-import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
-import Library from "../library";
-import Liked from "../liked";
-import Suggested from "../suggested";
+import DownloadPicture from "@/components/BottomSheet";
+import { useState } from "react";
+import { View, Text, Button } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 
-const Tab = createMaterialTopTabNavigator();
+export default function explore() {
+  const [pictureOpen, setPictureOpened] = useState(false);
 
-export default function ForYou() {
   return (
-    <Tab.Navigator>
-      <Tab.Screen name="Library" component={Library} />
-      <Tab.Screen name="Liked" component={Liked} />
-      <Tab.Screen name="Suggested" component={Suggested} />
-    </Tab.Navigator>
+    <SafeAreaView style={{ flex: 1 }}>
+      <View style={{ flex: 1 }}>
+        <Text>account</Text>
+        <Button
+          title="Open Bottom sheet"
+          onPress={() => {
+            setPictureOpened(true);
+          }}
+        ></Button>
+        {pictureOpen && (
+          <DownloadPicture onClose={() => setPictureOpened(false)} />
+        )}
+      </View>
+    </SafeAreaView>
   );
 }
