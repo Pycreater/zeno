@@ -1,9 +1,8 @@
-import { ImageCrad } from "@/components/ImageCard";
+import { ImageCard } from "@/components/ImageCard";
 import ParallaxScrollView from "@/components/ParallaxScrollView";
 import { useWallPapers, Wallpaper } from "@/hooks/useWallpapers";
-import { Image, Text } from "react-native";
+import { Image, Text, StyleSheet, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { v4 as uuidv4 } from "uuid";
 
 export default function explore() {
   const wallpapers = useWallPapers();
@@ -20,9 +19,17 @@ export default function explore() {
           />
         }
       >
-        {wallpapers.map((w: Wallpaper) => (
-          <ImageCrad key={uuidv4()} wallpaper={w} />
-        ))}
+        <View style={styles.container}>
+          {wallpapers.map((w: Wallpaper) => (
+            <ImageCard
+              key={w.url}
+              wallpaper={w}
+              onPress={() => {
+                console.log("");
+              }}
+            />
+          ))}
+        </View>
       </ParallaxScrollView>
     </SafeAreaView>
   );
@@ -44,3 +51,9 @@ export default function explore() {
   //   </SafeAreaView>
   // );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 0.5,
+  },
+});
