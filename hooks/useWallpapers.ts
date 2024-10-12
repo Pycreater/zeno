@@ -60,8 +60,11 @@
 
 import { useEffect, useState } from "react";
 import { createApi } from "unsplash-js";
+// import { UNSPLASH_ACCESS_KEY } from "@env";
 
 // Replace with your actual Unsplash access key obtained from https://unsplash.com/
+// const unsplashAccessKey: string = UNSPLASH_ACCESS_KEY;
+
 const unsplashAccessKey: string = "tpE0NXsfjBCgatXh3Qb2tT-aX0ZqsCpl7n22I7g49oc";
 
 const unsplash = createApi({ accessKey: unsplashAccessKey });
