@@ -50,6 +50,7 @@ const styles = StyleSheet.create({
   },
   label: {
     color: "white",
+    marginLeft: 3,
   },
   labelContainer: {
     position: "absolute",
