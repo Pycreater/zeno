@@ -1,11 +1,11 @@
 import { ImageCard } from "@/components/ImageCard";
 import ParallaxScrollView from "@/components/ParallaxScrollView";
-import { useWallPapers, Wallpaper } from "@/hooks/useWallpapers";
+import { useWallpapers, Wallpaper } from "@/hooks/useWallpapers";
 import { Image, Text, StyleSheet, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
-export default function explore() {
-  const wallpapers = useWallPapers();
+export default function Explore() {
+  const wallpapers = useWallpapers();
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <ParallaxScrollView
@@ -21,39 +21,30 @@ export default function explore() {
       >
         <View style={styles.container}>
           {wallpapers.map((w: Wallpaper) => (
-            <ImageCard
-              key={w.url}
-              wallpaper={w}
-              onPress={() => {
-                console.log("");
-              }}
-            />
+            <View style={styles.imageWrapper} key={w.url}>
+              <ImageCard
+                wallpaper={w}
+                onPress={() => {
+                  console.log("");
+                }}
+              />
+            </View>
           ))}
         </View>
       </ParallaxScrollView>
     </SafeAreaView>
   );
-
-  // return (
-  //   <SafeAreaView style={{ flex: 1 }}>
-  //     <View style={{ flex: 1 }}>
-  //       <Text>Explore</Text>
-  //       <Button
-  //         title="Open Bottom sheet"
-  //         onPress={() => {
-  //           setPictureOpened(true);
-  //         }}
-  //       ></Button>
-  //       {pictureOpen && (
-  //         <DownloadPicture onClose={() => setPictureOpened(false)} />
-  //       )}
-  //     </View>
-  //   </SafeAreaView>
-  // );
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 0.5,
+    flexDirection: "row", // Two columns layout
+    flexWrap: "wrap", // Wrap rows if there's not enough space
+    justifyContent: "space-between", // Spacing between items
+    padding: 10, // Add padding around the container
+  },
+  imageWrapper: {
+    width: "48%", // Each card takes about half of the width (adjust to fit the design)
+    marginBottom: 10, // Space between rows
   },
 });
