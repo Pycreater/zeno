@@ -77,20 +77,27 @@ export function useWallpapers(): Wallpaper[] {
       try {
         const result = await unsplash.photos.getRandom({ count: 10 });
 
+        console.log(result.response);
+
         // Handle if result.response is an array or a single object
         const photos = Array.isArray(result.response)
           ? result.response
           : [result.response];
 
+        // console.log(photos);
+
         const wallpaperData = photos
           .filter((photo) => photo !== undefined && photo !== null) // Ensure photo is defined
           .map((photo) => ({
-            id: photo.id || "N/A", // Provide fallback if id is missing
-            url: photo.urls?.regular || "", // Provide fallback for the URL
-            name: photo.alt_description?.substring(0, 9) || "Wallpaper", // Use alt description or default name
+            id: photo.id || "N/A",
+            url: photo.urls?.regular || "",
+            name: photo.alt_description || "Wallpaper",
+            createdAt: photo.created_at || "N/A", // Get the creation date
+            likes: photo.likes || 0, // Get the number of likes
           }));
 
         setWallpapers(wallpaperData);
+        // console.log("Fetched Wallpapers:", wallpaperData);
       } catch (error) {
         console.error("Error fetching wallpapers:", error);
         // Handle error gracefully (e.g., display an error message to the user)
@@ -108,4 +115,6 @@ export interface Wallpaper {
   id: string;
   url: string;
   name: string;
+  createdAt: string;
+  likes: number;
 }

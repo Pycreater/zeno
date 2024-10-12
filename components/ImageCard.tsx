@@ -20,47 +20,68 @@ export function ImageCard({
   const theme = useColorScheme() ?? "light";
 
   return (
-    <Pressable onPress={onPress}>
-      <View>
-        <Image source={{ uri: wallpaper.url }} style={styles.image} />
-        <View style={styles.labelContainer}>
-          <ThemedText style={styles.label}>{wallpaper.name}</ThemedText>
-          <View style={styles.iconContainer}>
-            <Ionicons
-              name={"heart"}
-              size={18}
-              color={theme === "light" ? Colors.light.icon : Colors.dark.icon}
-            />
-          </View>
+    <Pressable onPress={onPress} style={styles.cardContainer}>
+      <Image source={{ uri: wallpaper.url }} style={styles.image} />
+      <View style={styles.labelContainer}>
+        <View style={styles.iconWithText}>
+          <Ionicons
+            name={"heart"}
+            size={22}
+            color={theme === "light" ? Colors.light.icon : Colors.dark.icon}
+          />
+          <ThemedText style={styles.label}>{wallpaper.likes}</ThemedText>
         </View>
+        <Ionicons
+          name={"share"}
+          size={22}
+          color={theme === "light" ? Colors.light.icon : Colors.dark.icon}
+          style={styles.iconRight}
+        />
       </View>
     </Pressable>
   );
 }
 
 const styles = StyleSheet.create({
-  iconContainer: {
-    display: "flex",
-    justifyContent: "center",
+  cardContainer: {
+    marginVertical: 12,
+    borderRadius: 16,
+    overflow: "hidden",
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 6 },
+    shadowOpacity: 0.2,
+    shadowRadius: 8,
+    elevation: 4,
   },
   image: {
-    flex: 1,
-    height: 220,
-    borderRadius: 20,
-  },
-  label: {
-    color: "white",
-    marginLeft: 3,
+    height: 260,
+    width: "100%",
+    borderRadius: 16,
   },
   labelContainer: {
     position: "absolute",
     bottom: 0,
     width: "100%",
-    backgroundColor: "rgba(0, 0 , 0, 0.5)",
+    backgroundColor: "rgba(0, 0, 0, 0.6)",
     flexDirection: "row",
     justifyContent: "space-between",
-    padding: 5,
-    borderBottomLeftRadius: 20,
-    borderBottomRightRadius: 20,
+    alignItems: "center",
+    paddingHorizontal: 18,
+    paddingVertical: 12,
+    borderBottomLeftRadius: 16,
+    borderBottomRightRadius: 16,
+  },
+  iconWithText: {
+    flexDirection: "row",
+    alignItems: "center",
+  },
+  label: {
+    color: "white",
+    fontSize: 16,
+    fontWeight: "600",
+    marginLeft: 8,
+  },
+  iconRight: {
+    marginLeft: 16,
   },
 });
