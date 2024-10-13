@@ -8,11 +8,11 @@ import {
   Text,
   StatusBar,
   SafeAreaView,
+  ScrollView,
 } from "react-native";
 import BottomSheet, { BottomSheetView } from "@gorhom/bottom-sheet";
 import { Wallpaper } from "@/hooks/useWallpapers";
 import Ionicons from "@expo/vector-icons/Ionicons";
-import { Colors } from "@/constants/Colors";
 
 const DownloadPicture = ({
   onClose,
@@ -41,54 +41,58 @@ const DownloadPicture = ({
     >
       <BottomSheetView style={styles.contentContainer}>
         <StatusBar barStyle="light-content" />
-        <Image
-          style={styles.image}
-          source={{
-            uri: wallpaper.url,
-          }}
-        />
-        <View style={styles.topBar}>
-          <TouchableOpacity onPress={onClose} style={styles.iconWrapper}>
-            <Ionicons name="close" size={24} color="#FFFFFF" />
-          </TouchableOpacity>
-
-          <View style={styles.topBarInner}>
-            <TouchableOpacity style={styles.iconWrapper}>
-              <Ionicons name="heart" size={24} color="#FFFFFF" />
+        <ScrollView contentContainerStyle={styles.scrollViewContent}>
+          <Image
+            style={styles.image}
+            source={{
+              uri: wallpaper.url,
+            }}
+          />
+          <View style={styles.topBar}>
+            <TouchableOpacity onPress={onClose} style={styles.iconWrapper}>
+              <Ionicons name="close" size={24} color="#FFFFFF" />
             </TouchableOpacity>
 
-            <TouchableOpacity style={styles.iconWrapper}>
-              <Ionicons name="share-social" size={24} color="#FFFFFF" />
+            <View style={styles.topBarInner}>
+              <TouchableOpacity style={styles.iconWrapper}>
+                <Ionicons name="heart" size={24} color="#FFFFFF" />
+              </TouchableOpacity>
+
+              <TouchableOpacity style={styles.iconWrapper}>
+                <Ionicons name="share-social" size={24} color="#FFFFFF" />
+              </TouchableOpacity>
+            </View>
+          </View>
+
+          <SafeAreaView style={styles.safeArea}>
+            <View style={styles.infoContainer}>
+              <Text style={styles.title}>
+                {wallpaper.name || "Unnamed Image"}
+              </Text>
+              <Text style={styles.description}>
+                {`Uploaded on: ${new Date(
+                  wallpaper.createdAt
+                ).toLocaleDateString()}`}
+              </Text>
+              <Text
+                style={styles.description}
+              >{`${wallpaper.likes} Likes`}</Text>
+            </View>
+
+            <TouchableOpacity
+              style={styles.downloadButton}
+              onPress={() => console.log("Download pressed")}
+            >
+              <Ionicons
+                name="download"
+                size={24}
+                color="white"
+                style={styles.downloadIcon}
+              />
+              <Text style={styles.downloadButtonText}>Download Wallpaper</Text>
             </TouchableOpacity>
-          </View>
-        </View>
-
-        <SafeAreaView style={styles.safeArea}>
-          <View style={styles.infoContainer}>
-            <Text style={styles.title}>
-              {wallpaper.name || "Unnamed Image"}
-            </Text>
-            <Text style={styles.description}>
-              {`Uploaded on: ${new Date(
-                wallpaper.createdAt
-              ).toLocaleDateString()}`}
-            </Text>
-            <Text style={styles.description}>{`${wallpaper.likes} Likes`}</Text>
-          </View>
-
-          <TouchableOpacity
-            style={styles.downloadButton}
-            onPress={() => console.log("Download pressed")}
-          >
-            <Ionicons
-              name="download"
-              size={24}
-              color="white"
-              style={styles.downloadIcon}
-            />
-            <Text style={styles.downloadButtonText}>Download Wallpaper</Text>
-          </TouchableOpacity>
-        </SafeAreaView>
+          </SafeAreaView>
+        </ScrollView>
       </BottomSheetView>
     </BottomSheet>
   );
@@ -114,8 +118,13 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "#121212",
   },
+  scrollViewContent: {
+    flexGrow: 1,
+    justifyContent: "space-between",
+  },
   image: {
-    height: "65%",
+    width: "100%",
+    height: 300, // Adjust the height as per your requirement
     resizeMode: "cover",
   },
   topBar: {

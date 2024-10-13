@@ -3,6 +3,7 @@ import { View, StyleSheet, StatusBar, SafeAreaView } from "react-native";
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
 import { SplitView } from "@/components/SplitView";
 import { useWallpapers } from "@/hooks/useWallpapers";
+import { ScrollView } from "react-native-gesture-handler";
 
 const Tab = createMaterialTopTabNavigator();
 
@@ -13,7 +14,9 @@ const WallpaperScreen = ({ type }) => {
 
   return (
     <View style={styles.screenContainer}>
-      <SplitView wallpapers={wallpapers} />
+      <ScrollView contentContainerStyle={styles.scrollViewContent}>
+        <SplitView wallpapers={wallpapers} />
+      </ScrollView>
     </View>
   );
 };
@@ -53,8 +56,13 @@ const styles = StyleSheet.create({
     marginTop: StatusBar.currentHeight || 0,
   },
   screenContainer: {
-    flex: 1,
-    backgroundColor: "#f5f5f5",
+    flex: 1, // Ensure the screen container takes full available space
+  },
+  scrollViewContent: {
+    flexGrow: 1, // Make sure the content inside the ScrollView can expand vertically
+    justifyContent: "flex-start", // Optional, depending on how you want the content aligned
+    paddingBottom: 20, // Ensure there's some padding at the bottom for better UX
+    height: "50%",
   },
   tabBar: {
     backgroundColor: "#ffffff",
